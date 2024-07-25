@@ -1,3 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.register{
+    background-image: url('./assets/login.png');
+    background-size: cover;
+    background-repeat: no-repeat;   
+}

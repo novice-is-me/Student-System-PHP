@@ -34,3 +34,18 @@
     </section>
 </body>
 </html>
+
+<?php 
+
+    if($_SERVER["REQUEST_METHOD"] == "POST"){
+        $email = filter_input(INPUT_POST, "email", FILTER_SANITIZE_SPECIAL_CHARS);
+        $password = filter_input(INPUT_POST, "password", FILTER_SANITIZE_SPECIAL_CHARS);
+
+        if($email && $password){
+            echo "Login Successfully";
+            header("Location: ./register.php");
+        }
+    }
+
+
+?>
