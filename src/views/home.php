@@ -15,10 +15,24 @@
             <img src="./assets/users.png" alt="" class="w-[50%]">
             <h1 class=" text-4xl font-[Roboto] font-bold">STUDENT REGISTRATION SYSTEM</h1>
         </div>
-        <div class="flex flex-col gap-y-4">
-            <button class=" bg-[#65558F] text-white py-4 px-8 rounded-xl">Login</button>
-            <button class=" bg-[#65558F] text-white py-4 px-8 rounded-xl">Sign Up</button>
-        </div>
+        <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF'])?>" method="post">
+            <div class="flex flex-col gap-y-4">
+                <button class=" bg-[#65558F] text-white py-4 px-8 rounded-xl" 
+                    value="login">Login</button>
+                <button class=" bg-[#65558F] text-white py-4 px-8 rounded-xl" 
+                    value="register" >Sign Up</button>
+            </div>
+        </form>
     </section>
 </body>
 </html>
+
+<?php 
+    if(isset($_POST['login'])){
+        header("Location: ./login.php");
+    }
+    
+    if(isset($_POST['register'])){
+        header("Location: ./register.php");
+    }
+?>

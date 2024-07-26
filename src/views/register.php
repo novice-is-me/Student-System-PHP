@@ -68,6 +68,7 @@
             if($firstName && $middleInitial && $lastName && $age && $address && $course 
                 && $year && $course && $section) {
                     echo "Student registered successfully";
+                    header('Location: home.php');
             }else{
                 echo "Please fill out all fields";
             }
