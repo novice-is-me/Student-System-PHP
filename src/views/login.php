@@ -1,3 +1,7 @@
+<?php 
+    include('../../config/database.php');
+    session_start(); 
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,7 +16,7 @@
 <body>
     <section class="flex gap-y-8 h-full items-center">
        <div class="w-[50%]">
-            <img src="./assets/login.png" alt="">
+            <img src="../../assets/login.png" alt="">
        </div>
        <div class="text-center w-[50%] flex flex-col">
             <h3 class=" text-5xl uppercase font-semibold mb-4">Login</h3>
@@ -42,10 +46,39 @@
         $password = filter_input(INPUT_POST, "password", FILTER_SANITIZE_SPECIAL_CHARS);
 
         if($email && $password){
-            echo "Login Successfully";
-            header("Location: ./register.php");
+
+            $_SESSION['email'] = $email;
+            $_SESSION['password'] = $password;
+ 
+            $sql = "SELECT * FROM students WHERE email = '$email' AND password = '$password'";
+            $result = mysqli_query($conn, $sql); 
+            
+            if ($email && $password) {
+                // Retrieve the stored hash from the database
+                $sql = "SELECT password FROM students WHERE email = '$email'";
+                $result = mysqli_query($conn, $sql);
+        
+                if (mysqli_num_rows($result) == 1) {
+                    $row = mysqli_fetch_assoc($result);
+                    $stored_hash = $row['password'];
+        
+                    // Verify the password
+                    if (password_verify($password, $stored_hash)) {
+                        $_SESSION['email'] = $email; 
+                        echo "Login Successfully";
+                        header('Location: ./homepage.php');
+                        exit;
+                    } else {
+                        echo "Invalid email or password.";
+                    }
+                } else {
+                    echo "Invalid email or password.";
+                }
+            } else {
+                echo "Please fill out all fields.";
+            }
+            // echo "Login Successfully";
+            // header('Location: ./homepage.php');  
         }
-    }
-
-
+    } 
 ?>

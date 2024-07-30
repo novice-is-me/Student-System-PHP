@@ -12,15 +12,15 @@
 <body>
     <section class="flex flex-col items-center w-[100%] gap-y-8">
         <div class="flex flex-col items-center gap-y-8">
-            <img src="./assets/users.png" alt="" class="w-[50%]">
+            <img src="../../assets/users.png" alt="" class="w-[50%]">
             <h1 class=" text-4xl font-[Roboto] font-bold">STUDENT REGISTRATION SYSTEM</h1>
         </div>
         <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF'])?>" method="post">
             <div class="flex flex-col gap-y-4">
                 <button class=" bg-[#65558F] text-white py-4 px-8 rounded-xl" 
-                    value="login">Login</button>
+                    name="login">Login</button>
                 <button class=" bg-[#65558F] text-white py-4 px-8 rounded-xl" 
-                    value="register" >Sign Up</button>
+                    name="register" >Sign Up</button>
             </div>
         </form>
     </section>
@@ -29,7 +29,7 @@
 
 <?php 
     if(isset($_POST['login'])){
-        header("Location: ./login.php");
+        header("Location: ./login.php"); 
     }
     
     if(isset($_POST['register'])){

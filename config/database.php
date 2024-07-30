@@ -11,4 +11,4 @@
     }catch(mysqli_sql_exception){
         echo "Failed to connect to the database";
     }
-?>
+?>  
