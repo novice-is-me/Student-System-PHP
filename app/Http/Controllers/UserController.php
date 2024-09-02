@@ -28,4 +28,18 @@ class UserController extends Controller
 
         return view('student.dashboard')->with('user', $user);
     }
+
+    public function addSubject(Request $request){
+        $user = Auth::user();
+
+        
+
+        return redirect('/dashboard');
+    }
+
+    public function logout(){
+        Auth::logout();
+
+        return redirect('/');
+    }
 }
