@@ -16,7 +16,7 @@
             <h1 class=" text-4xl font-[Roboto] font-bold">STUDENT REGISTRATION SYSTEM</h1>
         </div>
         <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF'])?>" method="post">
-            <div class="flex flex-col gap-y-4">
+            <div class="flex flex-col gap-y-4 text-center">
                 <a href="/login" class=" bg-[#65558F] text-white py-4 px-8 rounded-xl" 
                     name="login">Login</a>
                 <a href="/register" class=" bg-[#65558F] text-white py-4 px-8 rounded-xl" 

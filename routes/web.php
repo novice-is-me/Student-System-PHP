@@ -4,18 +4,9 @@ use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
-Route::get('/register', function () {
-    return view('auth.register');
-});
-
-Route::get('/login', function () {
-    return view('auth.login');
-});
-
+Route::get('/', [UserController::class, 'welcome']);
+Route::get('/register', [UserController::class, 'register']);
+Route::get('/login', [UserController::class, 'login']);
 Route::get('/dashboard', [UserController::class, 'index']);
 
 Auth::routes();
