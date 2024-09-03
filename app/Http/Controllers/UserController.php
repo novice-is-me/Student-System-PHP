@@ -25,14 +25,18 @@ class UserController extends Controller
     public function index(){
 
         $user = Auth::user();
-
-        return view('student.dashboard')->with('user', $user);
+        $courses = $user->course;
+        $subjects = $courses->subjects;
+        
+        return view('student.dashboard')->with([
+            'user' => $user,
+            'courses' => $courses,
+            'subjects' => $subjects
+        ]);
     }
 
     public function addSubject(Request $request){
         $user = Auth::user();
-
-        
 
         return redirect('/dashboard');
     }

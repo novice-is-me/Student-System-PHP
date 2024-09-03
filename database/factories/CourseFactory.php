@@ -17,9 +17,11 @@ class CourseFactory extends Factory
      */
     public function definition(): array
     {
+        $user = User::inRandomOrder()->first();
+
         return [
             'name' => fake()->randomElement(['Computer Engineering', 'Teacher', 'Criminology']),
-            'user_id' => User::factory(),
+            'user_id' => $user ? $user->id : null,
         ];
     }
 }
