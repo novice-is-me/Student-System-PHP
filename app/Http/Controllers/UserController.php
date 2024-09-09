@@ -28,6 +28,7 @@ class UserController extends Controller
 
         $user = Auth::user();
         $courses = $user->course; 
+        // dd($courses);
 
         // This is to check if the user has any course and avoid null errors
         if($courses === null){
@@ -35,6 +36,7 @@ class UserController extends Controller
             $subjects = collect();
         } else {
             $subjects = $courses->subjects;
+            // dd($subjects);
         }
              
         return view('student.dashboard')->with([
@@ -61,14 +63,28 @@ class UserController extends Controller
     }
 
     public function enrollCourse(Request $request){
-        dd($request->input('course_name'));
+        // dd($request->input('course_name'));
 
         // check if the user is logged in / authenticated
         $user = Auth::user();
-
         if($user){
-            // enroll the user to the course
-           
+
+            // dd($user->course);
+            // if user is logged in, check if the user is enrolled in a course
+           if($user->course === null){
+               // if user is not enrolled in a course, enroll the user in a course
+               $course = Course::where('name', $request->input('course_name'))->first();
+            //    dd($course);
+               $user->course = $course->id;
+               $course->user_id = $user->id;
+            //    dd($course->user_id);
+               $course->save();
+
+               return redirect('/dashboard');
+           } else {
+                // if user is already enrolled in a course, redirect to dashboard
+                return redirect('/dashboard');
+           }
 
         }else{
             // if not login, redirect to login page
