@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content') 
-    @if ($courses == null)
+    @if ($courses->count() <= 0)
         <a href="/dashboard" class=" bg-slate-400 p-3 rounded-[20px] hover:cursor-pointer">Add Course</a>
     @endif
     <h2 class=" mt-5 text-3xl font-bold mb-2">Enrolled Course</h2>
