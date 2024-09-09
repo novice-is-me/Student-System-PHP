@@ -9,11 +9,11 @@ Route::get('/', [UserController::class, 'welcome']);
 Route::get('/register', [UserController::class, 'register']);
 Route::get('/login', [UserController::class, 'login']);
 Route::get('/dashboard', [UserController::class, 'index']);
-// Route for students adding subjects
-Route::post('/dashboard', [UserController::class, 'addSubject']);
-// Route for students removing subjects
-Route::post('/dashboard', [UserController::class, 'enrollCourse']);
-Route::delete('/dashboard', [UserController::class, 'removeSubject']);
+Route::get('/enrollment', [UserController::class, 'enrollment']);
+// Route for students for options (enrollment, adding, removing subjects)
+Route::post('/add-subject', [UserController::class, 'addSubject']);
+Route::post('/enroll-course', [UserController::class, 'enrollCourse']);
+Route::delete('/remove-subject', [UserController::class, 'removeSubject']);
 Route::get('/logout', [UserController::class, 'logout']);
 
 // Admin Routes

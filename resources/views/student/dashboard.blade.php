@@ -2,7 +2,7 @@
 
 @section('content') 
     @if ($courses->count() <= 0)
-        <a href="/dashboard" class=" bg-slate-400 p-3 rounded-[20px] hover:cursor-pointer">Add Course</a>
+        <a href="/enrollment" class=" bg-slate-400 p-3 rounded-[20px] hover:cursor-pointer">Add Course</a>
     @endif
     <h2 class=" mt-5 text-3xl font-bold mb-2">Enrolled Course</h2>
     <div class="mt-2">
@@ -10,7 +10,7 @@
             <x-slot name="thead">
                 <th>Course Code</th>
                 <th>Course Title</th>
-                <th>Course Unit</th>
+                <th>Course Unit</th>    
             </x-slot>
             <x-slot name="tbody">
                 @php
@@ -32,12 +32,13 @@
         </x-table>
     </div>
 
-    <h2 class="mt-5 text-3xl font-bold mb-2">Subject Enrolled</h2>
+    <h2 class="mt-5 text-3xl font-bold mb-2">Subjects Available</h2>
     <div class="">
         <x-table>
             <x-slot name="thead">
                 <th>Subject Code</th>
                 <th>Course Title</th>
+                <th>Enrolled</th>
             </x-slot>
             <x-slot name="tbody">
                 @if ($subjects->count() > 0)
@@ -48,11 +49,15 @@
                         <tr class="flex justify-evenly font-medium text-center">
                             <td>{{ $subjectCode }}</td>
                             <td>{{ $subject->name }}</td>
+                            <td>
+                                {{-- Put here enrolled (red and green) --}}
+                                <a href="/dashboard" class="bg-slate-400 p-2 rounded-[20px] hover:cursor-pointer">Enroll</a>
+                            </td>
                         </tr>
                     @endforeach
                 @else
                     <tr class="flex justify-evenly font-medium">
-                        <td colspan="2">No subject enrolled yet</td>
+                        <td colspan="2">Enrolled at Course first</td>
                     </tr>
                 @endif
             </x-slot>

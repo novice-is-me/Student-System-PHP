@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Course;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
@@ -43,10 +44,38 @@ class UserController extends Controller
         ]);
     }
 
+    public function enrollment(){
+        $user = Auth::user();
+        $courses = Course::all();
+       
+        return view('student.enrollment')->with([
+            'user' => $user,
+            'courses' => $courses
+        ]);
+    }
+
     public function addSubject(Request $request){
         $user = Auth::user();
 
-        return redirect('/dashboard');
+        return view('student.subject');
+    }
+
+    public function enrollCourse(Request $request){
+        dd($request->input('course_name'));
+
+        // check if the user is logged in / authenticated
+        $user = Auth::user();
+
+        if($user){
+            // enroll the user to the course
+           
+
+        }else{
+            // if not login, redirect to login page
+            return redirect('/login');
+        }
+
+        
     }
 
     public function logout(){
