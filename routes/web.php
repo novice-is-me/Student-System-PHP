@@ -12,6 +12,7 @@ Route::get('/dashboard', [UserController::class, 'index']);
 // Route for students adding subjects
 Route::post('/dashboard', [UserController::class, 'addSubject']);
 // Route for students removing subjects
+Route::post('/dashboard', [UserController::class, 'enrollCourse']);
 Route::delete('/dashboard', [UserController::class, 'removeSubject']);
 Route::get('/logout', [UserController::class, 'logout']);
 

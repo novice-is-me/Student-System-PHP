@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
@@ -25,9 +26,16 @@ class UserController extends Controller
     public function index(){
 
         $user = Auth::user();
-        $courses = $user->course;
-        $subjects = $courses->subjects;
-        
+        $courses = $user->course; 
+
+        // This is to check if the user has any course and avoid null errors
+        if($courses === null){
+            $courses = collect();
+            $subjects = collect();
+        } else {
+            $subjects = $courses->subjects;
+        }
+             
         return view('student.dashboard')->with([
             'user' => $user,
             'courses' => $courses,
