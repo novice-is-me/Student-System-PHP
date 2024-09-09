@@ -26,24 +26,33 @@ class UserController extends Controller
 
     public function index(){
 
+        // checking user role
         $user = Auth::user();
-        $courses = $user->course; 
-        // dd($courses);
+        // for user 
+        if($user->admin === 0){
+            $courses = $user->course; 
+            // dd($courses);
+    
+            // This is to check if the user has any course and avoid null errors
+            if($courses === null){
+                $courses = collect();
+                $subjects = collect();
+            } else {
+                $subjects = $courses->subjects;
+                // dd($subjects);
+            }
+                 
+            return view('student.dashboard')->with([
+                'user' => $user,
+                'courses' => $courses,
+                'subjects' => $subjects
+            ]);
 
-        // This is to check if the user has any course and avoid null errors
-        if($courses === null){
-            $courses = collect();
-            $subjects = collect();
-        } else {
-            $subjects = $courses->subjects;
-            // dd($subjects);
+        }else{
+            // for admin bro
+            
         }
-             
-        return view('student.dashboard')->with([
-            'user' => $user,
-            'courses' => $courses,
-            'subjects' => $subjects
-        ]);
+        
     }
 
     public function enrollment(){
@@ -68,7 +77,6 @@ class UserController extends Controller
         // check if the user is logged in / authenticated
         $user = Auth::user();
         if($user){
-
             // dd($user->course);
             // if user is logged in, check if the user is enrolled in a course
            if($user->course === null){
