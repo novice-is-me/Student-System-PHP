@@ -42,7 +42,7 @@ class UserController extends Controller
                 // dd($subjects);
             }
                  
-            return view('student.dashboard')->with([
+            return view('livewire.student.dashboard')->with([
                 'user' => $user,
                 'courses' => $courses,
                 'subjects' => $subjects
@@ -52,14 +52,13 @@ class UserController extends Controller
             // for admin bro
             
         }
-        
     }
 
     public function enrollment(){
         $user = Auth::user();
         $courses = Course::all();
        
-        return view('student.enrollment')->with([
+        return view('livewire.student.enrollment')->with([
             'user' => $user,
             'courses' => $courses
         ]);
@@ -98,8 +97,6 @@ class UserController extends Controller
             // if not login, redirect to login page
             return redirect('/login');
         }
-
-        
     }
 
     public function logout(){
