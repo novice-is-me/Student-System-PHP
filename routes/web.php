@@ -11,5 +11,8 @@ Auth::routes();
 Route::get('/', [UserController::class, 'welcome'])->name('welcome');
 Route::get('/register', [UserController::class, 'register'])->name('register');
 Route::get('/login', [UserController::class, 'login'])->name('login');
+Route::get('/logout', [UserController::class, 'logout'])->name('logout');
+
+Route::get('/dashboard', Dashboard::class);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
