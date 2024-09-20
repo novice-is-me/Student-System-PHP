@@ -36,6 +36,18 @@ class Dashboard extends Component
         }
         
     }
+
+    public function enroll(){
+        // Logic for enrolling in a course can be added here
+
+        $id = Auth::user()->id;
+        foreach($this->subjects as $subject){
+            $subject->user_id = $id;
+            $subject->save();
+            dd('enrolled');
+        }
+    }
+
     public function render()
     {
 
