@@ -50,7 +50,10 @@
                         @if ($subject->user_id === Auth::user()->id)
                             <td>
                                 {{-- Put here enrolled (red and green) --}}
-                                <a wire:click='enroll' class="bg-slate-400 p-2 rounded-[20px] hover:cursor-pointer">Enrolled</a>
+                                <a 
+                                    x-data 
+                                    x-on:click="$dispatch('open-modal', { subject: '{{ $subject->name }}', subjectCode: '{{ $subjectCode }}'})" 
+                                    class="bg-slate-400 p-2 rounded-[20px] hover:cursor-pointer">Enrolled</a>
                             </td>
                         @else
                             <td>
@@ -66,6 +69,7 @@
                 </tr>
                 @endif
             </x-slot>
+            <x-modal subject="{{ $subject->name }}" subjectCode="{{ $subjectCode }}" />
         </x-table>
     </div>
 </div>
