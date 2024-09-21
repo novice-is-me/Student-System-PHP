@@ -20,8 +20,8 @@ class UserController extends Controller
         return view('auth.register');
     }
 
-    public function login(){
-        return view('auth.login');
+    public function login(){ 
+        return view('auth.login'); 
     }
 
     public function index(){
