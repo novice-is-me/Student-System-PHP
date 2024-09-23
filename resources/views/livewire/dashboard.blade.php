@@ -1,8 +1,9 @@
 <div>
     @if ($courses->count() <= 0)
-        <a wire:click='' href="/enrollment" class=" bg-slate-400 p-3 rounded-[20px] hover:cursor-pointer">Add Course</a>
+        <a wire:click='' href="/enrollment" class="bg-slate-400 p-3 rounded-[20px] hover:cursor-pointer">Add Course</a>
     @endif
-    <h2 class=" mt-5 text-3xl font-bold mb-2">Enrolled Course</h2>
+
+    <h2 class="mt-5 text-3xl font-bold mb-2">Enrolled Course</h2>
     <div class="mt-2">
         <x-table>
             <x-slot name="thead">
@@ -44,20 +45,19 @@
                     @php
                     $subjectCode = str_pad(rand(0, 9999), 4, '0', STR_PAD_LEFT);
                     @endphp
-                    <tr wire:key='{{ $subject->id }}' class="flex justify-evenly font-medium text-center">
+                    <tr wire:key='{{ $subject->id }}' class="flex justify-evenly font-medium text-center p-5">
                         <td>{{ $subjectCode }}</td>
                         <td>{{ $subject->name }}</td>
                         @if ($subject->user_id === Auth::user()->id)
                             <td>
-                                {{-- Put here enrolled (red and green) --}}
                                 <a 
-                                    x-data 
-                                    x-on:click="$dispatch('open-modal', { subject: '{{ $subject->name }}', subjectCode: '{{ $subjectCode }}'})" 
-                                    class="bg-slate-400 p-2 rounded-[20px] hover:cursor-pointer">Enrolled</a>
+                                   wire:click='check({{ $subject->id }})' 
+                                   class="bg-slate-400 p-2 rounded-[20px] hover:cursor-pointer">
+                                   Enrolled
+                                </a>
                             </td>
                         @else
                             <td>
-                                {{-- Put here enrolled (red and green) --}}
                                 <a wire:click='enroll' class="bg-slate-400 p-2 rounded-[20px] hover:cursor-pointer">Enroll</a>
                             </td>
                         @endif
@@ -65,12 +65,13 @@
                 @endforeach
                 @else
                 <tr class="flex justify-evenly font-medium">
-                    <td colspan="2">Enrolled at Course first</td>
+                    <td colspan="2">Enroll in a Course first</td>
                 </tr>
                 @endif
             </x-slot>
-            <x-modal subject="{{ $subject->name }}" subjectCode="{{ $subjectCode }}" />
         </x-table>
     </div>
+
+    <!-- Move the modal outside of the subjects loop -->
+    <x-modal name="subject-details" :selectedSubject="$selectedSubject" :subjectCode="$subjectCode"/>
 </div>
-    

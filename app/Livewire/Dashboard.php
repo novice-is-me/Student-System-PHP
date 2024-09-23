@@ -14,6 +14,8 @@ class Dashboard extends Component
     public $user;
     public $courses;
     public $subjects;
+
+    public $selectedSubject;
     
     public function mount(){
 
@@ -35,6 +37,12 @@ class Dashboard extends Component
             dd('not login');
         }
         
+    }
+
+    public function check(Subject $subject)
+    {
+        $this->selectedSubject = $subject;
+        $this->dispatch('open-modal', name : 'subject-details');
     }
 
     public function enroll(){
