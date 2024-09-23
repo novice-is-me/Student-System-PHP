@@ -55,7 +55,11 @@ class Dashboard extends Component
         }else{
             $selectedSubject->user_id = $id;
         }
+
         $selectedSubject->save();
+        $this->subjects = $this->courses->subjects;
+                
+        $this->dispatch('open-success-modal', ['name' => 'success-modal']);
     }
 
     public function render()

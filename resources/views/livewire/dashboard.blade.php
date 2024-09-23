@@ -1,4 +1,4 @@
-<div wire:poll.keep-alive>
+<div >
     @if ($courses->count() <= 0)
         <a wire:click='' href="/enrollment" class="bg-slate-400 p-3 rounded-[20px] hover:cursor-pointer">Add Course</a>
     @endif
@@ -48,18 +48,22 @@
                     <tr wire:key='{{ $subject->id }}' class="flex justify-evenly font-medium text-center p-5">
                         <td>{{ $subjectCode }}</td>
                         <td>{{ $subject->name }}</td>
-                        <td></td>
-                        @if ($subject->user_id === Auth::user()->id)
-                            <td>
-                                <a wire:click='enroll({{ $subject->id }})' class="bg-blue-400 p-2 rounded-[20px] hover:cursor-pointer">Enrolled</a>
-                                <a wire:click='check({{ $subject->id }})' class=" bg-green-400  p-2 rounded-[20px] hover:cursor-pointer" >View</a>
-                            </td>
-                        @else
-                            <td>
-                                <a wire:click='enroll({{ $subject->id }})' class="bg-red-400 p-2 rounded-[20px] hover:cursor-pointer">Enroll</a>
-                                <a wire:click='check({{ $subject->id }})' class=" bg-green-300  p-2 rounded-[20px] hover:cursor-pointer">View</a>
-                            </td>
-                        @endif
+                        <td>
+                            <a 
+                                wire:click='enroll({{ $subject->id }})' class="{{ $subject->user_id === Auth::user()->id ? 'bg-blue-400' : 'bg-red-400' }} p-2 rounded-[20px] hover:cursor-pointer">
+                                <span wire:loading.remove>
+                                    {{ $subject->user_id === Auth::user()->id ? 'Enrolled' : 'Enroll'}}
+                                </span>
+                                <span wire:loading>
+                                    ...
+                                </span>
+                            </a>
+                            <a 
+                                wire:click='check({{ $subject->id }})' 
+                                class=" bg-green-400  p-2 rounded-[20px] hover:cursor-pointer">
+                                View
+                            </a>
+                        </td>
                     </tr>
                 @endforeach
                 @else
@@ -75,5 +79,7 @@
     @if ($selectedSubject)
         <x-modal name="subject-details" :selectedSubject="$selectedSubject" :subjectCode="$subjectCode"/>
     @endif
-    
+
+    {{-- Modal for success --}}
+    <x-success-modal name="success-modal" :data/>
 </div>
