@@ -4,7 +4,7 @@
             {{ $thead }}
         </tr>
     </thead>
-    <tbody class="bg-slate-300 border border-t-slate-500 border-b-slate-500">
+    <tbody class="bg-slate-300 border border-t-slate-500 border-b-slate-500 flex flex-col justify-between">
         {{ $tbody }}
     </tbody>
 </table>

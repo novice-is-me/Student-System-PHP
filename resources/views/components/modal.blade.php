@@ -7,6 +7,7 @@
     x-on:close-modal.window="show = false"
     x-on:keydown.escape.window="show = false"
     x-transition
+    style="display: none"
     class="fixed inset-0 flex justify-center items-center bg-black bg-opacity-50"
 >
     <div class="bg-white p-6 rounded-lg">

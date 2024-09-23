@@ -45,15 +45,17 @@ class Dashboard extends Component
         $this->dispatch('open-modal', name : 'subject-details');
     }
 
-    public function enroll(){
+    public function enroll($subjectId){
         // Logic for enrolling in a course can be added here
-
+        $selectedSubject = Subject::find($subjectId);
         $id = Auth::user()->id;
-        foreach($this->subjects as $subject){
-            $subject->user_id = $id;
-            $subject->save();
-            dd('enrolled');
+
+        if($selectedSubject->user_id === $id){
+            $selectedSubject->user_id = null;
+        }else{
+            $selectedSubject->user_id = $id;
         }
+        $selectedSubject->save();
     }
 
     public function render()

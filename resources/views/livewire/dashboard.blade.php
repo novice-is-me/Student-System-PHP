@@ -1,4 +1,4 @@
-<div>
+<div wire:poll.keep-alive>
     @if ($courses->count() <= 0)
         <a wire:click='' href="/enrollment" class="bg-slate-400 p-3 rounded-[20px] hover:cursor-pointer">Add Course</a>
     @endif
@@ -37,7 +37,7 @@
             <x-slot name="thead">
                 <th>Subject Code</th>
                 <th>Course Title</th>
-                <th>Enrolled</th>
+                <th>Options</th>
             </x-slot>
             <x-slot name="tbody">
                 @if ($subjects->count() > 0)
@@ -48,30 +48,32 @@
                     <tr wire:key='{{ $subject->id }}' class="flex justify-evenly font-medium text-center p-5">
                         <td>{{ $subjectCode }}</td>
                         <td>{{ $subject->name }}</td>
+                        <td></td>
                         @if ($subject->user_id === Auth::user()->id)
                             <td>
-                                <a 
-                                   wire:click='check({{ $subject->id }})' 
-                                   class="bg-slate-400 p-2 rounded-[20px] hover:cursor-pointer">
-                                   Enrolled
-                                </a>
+                                <a wire:click='enroll({{ $subject->id }})' class="bg-blue-400 p-2 rounded-[20px] hover:cursor-pointer">Enrolled</a>
+                                <a wire:click='check({{ $subject->id }})' class=" bg-green-400  p-2 rounded-[20px] hover:cursor-pointer" >View</a>
                             </td>
                         @else
                             <td>
-                                <a wire:click='enroll' class="bg-slate-400 p-2 rounded-[20px] hover:cursor-pointer">Enroll</a>
+                                <a wire:click='enroll({{ $subject->id }})' class="bg-red-400 p-2 rounded-[20px] hover:cursor-pointer">Enroll</a>
+                                <a wire:click='check({{ $subject->id }})' class=" bg-green-300  p-2 rounded-[20px] hover:cursor-pointer">View</a>
                             </td>
                         @endif
                     </tr>
                 @endforeach
                 @else
-                <tr class="flex justify-evenly font-medium">
-                    <td colspan="2">Enroll in a Course first</td>
-                </tr>
+                    <tr class="flex justify-evenly font-medium">
+                        <td colspan="2">Enroll in a Course first</td>
+                    </tr>
                 @endif
             </x-slot>
         </x-table>
     </div>
 
     <!-- Move the modal outside of the subjects loop -->
-    <x-modal name="subject-details" :selectedSubject="$selectedSubject" :subjectCode="$subjectCode"/>
+    @if ($selectedSubject)
+        <x-modal name="subject-details" :selectedSubject="$selectedSubject" :subjectCode="$subjectCode"/>
+    @endif
+    
 </div>
