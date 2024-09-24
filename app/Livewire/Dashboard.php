@@ -58,7 +58,8 @@ class Dashboard extends Component
 
         $selectedSubject->save();
         $this->subjects = $this->courses->subjects;
-                
+        // dd($selectedSubject);
+        $this->selectedSubject = $selectedSubject;
         $this->dispatch('open-success-modal', ['name' => 'success-modal']);
     }
 

@@ -81,5 +81,7 @@
     @endif
 
     {{-- Modal for success --}}
-    <x-success-modal name="success-modal" :data/>
+    @if($selectedSubject)
+        <x-success-modal name="success-modal" :selectedSubject="$selectedSubject"/>
+    @endif
 </div>

@@ -1,4 +1,4 @@
-@props(['data'])
+@props(['selectedSubject'])
 
 <div
     x-data="{ successModal: false }"
@@ -12,10 +12,9 @@
 >
     <div class="bg-white p-6 rounded-lg">
         <h1 class=" text-2xl text-green-600 font-bold">Success!</h1>
-        <p>You are now kyut</p>
+        <p>You are {{ $selectedSubject->user_id === Auth::user()->id ? 'Enrolled' : 'Not enrolled'}} </p>
         <div class="mt-4 flex justify-center">
             <button class="bg-blue-500 text-black px-4 py-2 rounded hover:bg-blue-600" @click="$dispatch('close-success-modal')">Close</button>
         </div>
     </div>
-    
 </div>
