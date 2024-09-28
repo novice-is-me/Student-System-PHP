@@ -32,11 +32,13 @@ class Dashboard extends Component
                 $this->subjects = $this->courses->subjects;  // Retrieve subjects from the user's courses
             }
             
-        } else {
+        } elseif($this->user->admin === null) {
             // Logic for admin can be added here
             dd('not login');
+        }else{
+            // Logic for admin can be added here
+            dd('admin');
         }
-        
     }
 
     public function check(Subject $subject)
