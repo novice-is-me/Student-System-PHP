@@ -55,13 +55,8 @@ class UserController extends Controller
     }
 
     public function enrollment(){
-        $user = Auth::user();
-        $courses = Course::all();
-       
-        return view('livewire.student.enrollment')->with([
-            'user' => $user,
-            'courses' => $courses
-        ]);
+        dd('not login');
+        return view('livewire.enrollment');
     }
 
     public function addSubject(Request $request){

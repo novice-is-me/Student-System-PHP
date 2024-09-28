@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\UserController;
 use App\Livewire\Dashboard;
+use App\Livewire\Enrollment;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -14,5 +15,8 @@ Route::get('/login', [UserController::class, 'login'])->name('login');
 Route::get('/logout', [UserController::class, 'logout'])->name('logout');
 
 Route::get('/dashboard', Dashboard::class);
+
+// Enrollment Section
+Route::get('/enrollment', Enrollment::class);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
