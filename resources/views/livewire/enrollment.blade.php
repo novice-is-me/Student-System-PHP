@@ -22,5 +22,8 @@
                 @endforeach
             </x-slot>
         </x-table>
+        {{-- Enrollment course modal --}}
+        @dd($specificCourse)
+        <x-enroll-modal name="course-enroll" :course='$specificCourse'/>
     </div>
 </div>
