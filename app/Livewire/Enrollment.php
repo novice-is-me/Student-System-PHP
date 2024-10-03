@@ -28,15 +28,13 @@ class Enrollment extends Component
         $id = Auth::user()->id;
         $currentlyEnrolledCourse = Course::where('user_id', $id)->first();
         if(!$currentlyEnrolledCourse){
-            // dd('You are enrolled now');
+            // Set the user_id of course to the id of the user id
             $specificCourse->user_id = $id;
         }
 
         $specificCourse->save();
         $this->specificCourse = $specificCourse;
-        // dd($specificCourse);
-        // event modal
-        $this->render();
+
         $this->dispatch('open-enroll-modal', name : 'course-enroll');
     }
     public function render()

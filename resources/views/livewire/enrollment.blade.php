@@ -23,7 +23,10 @@
             </x-slot>
         </x-table>
         {{-- Enrollment course modal --}}
-        @dd($specificCourse)
-        <x-enroll-modal name="course-enroll" :course='$specificCourse'/>
+        {{-- @dd($specificCourse) --}}
+        {{-- <x-enroll-modal name="course-enroll" :course='$specificCourse'/> --}}
+        @if ($specificCourse)
+            <x-enroll-modal name="course-enroll" :course='$specificCourse'/>
+        @endif
     </div>
 </div>
