@@ -37,7 +37,7 @@ class Dashboard extends Component
             dd('not login');
         }else{
             // Logic for admin can be added here
-            dd('admin');
+            return view('livewire.admin');
         }
     }
 
