@@ -20,7 +20,7 @@
             @endif
         </div>
         <div class="mt-4 flex justify-center">
-            <button class="bg-blue-500 text-black px-4 py-2 rounded hover:bg-blue-600" @click="$dispatch('close-enroll-modal')">Close</button>
+            <a href="{{ route('dashboard')}}" class="bg-blue-500 text-black px-4 py-2 rounded hover:bg-blue-600" @click="$dispatch('close-enroll-modal')">Close</a>
         </div>
     </div>
 </div>
