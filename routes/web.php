@@ -14,7 +14,7 @@ Route::get('/register', [UserController::class, 'register'])->name('register');
 Route::get('/login', [UserController::class, 'login'])->name('login');
 Route::get('/logout', [UserController::class, 'logout'])->name('logout');
 
-    Route::get('/dashboard', Dashboard::class)->name('dashboard');
+Route::get('/dashboard', Dashboard::class)->name('dashboard');
 
 // Enrollment Section
 Route::get('/enrollment', Enrollment::class);
