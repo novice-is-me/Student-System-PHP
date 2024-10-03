@@ -1,5 +1,8 @@
 <div>
-    <h1 class=" text-red-600 font-bold text-4xl text-center">Enrollment Section</h1>
+    <div>
+        <a href="{{ route('dashboard')}}" class=" bg-black text-white px-4 py-2 rounded">Back</a>
+        <h1 class=" text-red-600 font-bold text-4xl text-center">Enrollment Section</h1>
+    </div>
 
     <div class=" mt-4">
         <h3 class=" text-xl font-semibold">Available Courses:</h3>
@@ -22,9 +25,6 @@
                 @endforeach
             </x-slot>
         </x-table>
-        {{-- Enrollment course modal --}}
-        {{-- @dd($specificCourse) --}}
-        {{-- <x-enroll-modal name="course-enroll" :course='$specificCourse'/> --}}
         @if ($specificCourse)
             <x-enroll-modal name="course-enroll" :course='$specificCourse'/>
         @endif
