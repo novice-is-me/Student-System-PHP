@@ -24,6 +24,12 @@ class Admin extends Component
 
     }
 
+    public function view($id){
+
+        $this->dispatch('open-edit-student', name: 'edit-student');
+        dd($id);
+    }
+
     public function render()
     {
         return view('livewire.admin');

@@ -12,10 +12,13 @@
                         <td>{{ $user->first_name . $user->last_name}}</td>
                         <td>{{ $user->email }}</td>
                         <td>
-                            <a href="{{ route('edit-student', ['id' => $user->id ])}}" class=" bg-red-400 px-4 py-2 rounded">Edit</a>
+                            <a class=" bg-red-400 px-4 py-2 rounded hover:cursor-pointer" wire:click='view({{ $user->id }})'>Edit</a>
                         </td>
                     </tr>
                 @endforeach
             </x-slot>
         </x-table>
+
+        {{-- For edit view --}}
+        <x-edit-student-modal name="edit-student" :user="$user"/>
 </div>
