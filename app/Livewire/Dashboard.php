@@ -18,7 +18,8 @@ class Dashboard extends Component
     public function mount(){
         
         $this->user = Auth::user();
-        // Check if the user is not an admin
+        
+        // User is not an admin
         if ($this->user->admin === 0) {
             $this->courses = $this->user->course;
             
@@ -59,7 +60,11 @@ class Dashboard extends Component
     public function render()
     {
         if($this->user->admin === 1){
-            return view('livewire.admin');
+            return view('livewire.admin', [
+                'users' => User::all(),
+                'courses' => Course::all(),
+                'subjects' => Subject::all()
+            ]);
         }else{
             return view('livewire.dashboard');
         }
