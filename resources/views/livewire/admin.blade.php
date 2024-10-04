@@ -12,7 +12,7 @@
                         <td>{{ $user->first_name . $user->last_name}}</td>
                         <td>{{ $user->email }}</td>
                         <td>
-                            <a href="" class=" bg-red-400 px-4 py-2 rounded">Edit</a>
+                            <a href="{{ route('edit-student', ['id' => $user->id ])}}" class=" bg-red-400 px-4 py-2 rounded">Edit</a>
                         </td>
                     </tr>
                 @endforeach
