@@ -7,18 +7,16 @@ use App\Models\Subject;
 use App\Models\User;
 use Livewire\Component;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Log;
 
 class Dashboard extends Component
 {
     public $user;
     public $courses;
     public $subjects;
-
     public $selectedSubject;
     
     public function mount(){
-
+        
         $this->user = Auth::user();
         // Check if the user is not an admin
         if ($this->user->admin === 0) {
@@ -30,15 +28,8 @@ class Dashboard extends Component
                 $this->subjects = collect();  // Empty collection for subjects
             } else {
                 $this->subjects = $this->courses->subjects;  // Retrieve subjects from the user's courses
-            }
-            
-        } elseif($this->user->admin === null) {
-            // Logic for admin can be added here
-            dd('not login');
-        }else{
-            // Logic for admin can be added here
-            return view('livewire.admin');
-        }
+            }  
+        } 
     }
 
     public function check(Subject $subject)
@@ -67,7 +58,10 @@ class Dashboard extends Component
 
     public function render()
     {
-
-        return view('livewire.dashboard');
+        if($this->user->admin === 1){
+            return view('livewire.admin');
+        }else{
+            return view('livewire.dashboard');
+        }
     }
 }
