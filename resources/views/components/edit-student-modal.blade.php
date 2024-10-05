@@ -9,5 +9,7 @@
     style="display: none"
     class="fixed inset-0 flex justify-center items-center bg-black bg-opacity-50"
 >   
-    hello
+    <div class="bg-white p-6 rounded-lg">
+        hello
+    </div>
 </div>

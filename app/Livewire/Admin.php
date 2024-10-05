@@ -25,7 +25,6 @@ class Admin extends Component
     }
 
     public function userDetails($id){
-        dd($id);
 
         $this->dispatch('open-edit-student', name: 'edit-student');
     }
