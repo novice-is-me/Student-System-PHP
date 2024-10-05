@@ -58,15 +58,7 @@ class Dashboard extends Component
     }
 
     public function render()
-    {
-        if($this->user->admin === 1){
-            return view('livewire.admin', [
-                'users' => User::all(),
-                'courses' => Course::all(),
-                'subjects' => Subject::all()
-            ]);
-        }else{
-            return view('livewire.dashboard');
-        }
+    { 
+        return view('livewire.dashboard');
     }
 }

@@ -12,7 +12,7 @@
                         <td>{{ $user->first_name . $user->last_name}}</td>
                         <td>{{ $user->email }}</td>
                         <td>
-                            <a class=" bg-red-400 px-4 py-2 rounded hover:cursor-pointer" wire:click='view({{ $user->id }})'>Edit</a>
+                            <a class=" bg-red-400 px-4 py-2 rounded hover:cursor-pointer" wire:click='userDetails({{ $user->id }})'>Edit</a>
                         </td>
                     </tr>
                 @endforeach
@@ -20,5 +20,5 @@
         </x-table>
 
         {{-- For edit view --}}
-        <x-edit-student-modal name="edit-student" :user="$user"/>
+        <x-edit-student-modal name="edit-student" :user='$user'/>
 </div>

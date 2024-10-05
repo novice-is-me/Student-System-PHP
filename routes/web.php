@@ -16,7 +16,7 @@ Route::get('/login', [UserController::class, 'login'])->name('login');
 Route::get('/logout', [UserController::class, 'logout'])->name('logout');
 
 Route::get('/dashboard', Dashboard::class)->name('dashboard');
-
+Route::get('/admin', Admin::class)->name('admin');
 // Admin section
 Route::get('/edit-student/{id}', Admin::class)->name('edit-student');
 
