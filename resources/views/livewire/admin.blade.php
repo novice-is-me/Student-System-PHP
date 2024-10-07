@@ -18,7 +18,10 @@
                 @endforeach
             </x-slot>
         </x-table>
-
         {{-- For edit view --}}
-        <x-edit-student-modal name="edit-student" :user='$user'/>
-</div>
+        @if ($chosenUser)
+            {{-- <x-edit-student-modal name="edit-student" :user='$chosenUser'/> --}}
+            {{-- Must be a form --}}
+            @include('components.edit-student-modal', ['user' => $chosenUser])
+        @endif
+</div>      

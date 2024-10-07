@@ -16,6 +16,8 @@ class Admin extends Component
 
     public $subjects;
 
+    public $chosenUser;
+
     public function mount(){
 
         $this->users = User::all();
@@ -25,8 +27,8 @@ class Admin extends Component
     }
 
     public function userDetails($id){
-
-        $this->dispatch('open-edit-student', name: 'edit-student');
+        $this->chosenUser = User::find($id);
+        $this->dispatch('open-edit-student');
     }
 
     public function render()
