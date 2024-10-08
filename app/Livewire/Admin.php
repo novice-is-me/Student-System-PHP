@@ -18,6 +18,10 @@ class Admin extends Component
 
     public $chosenUser;
 
+    public $first_name;
+    public $last_name;
+    public $email;
+
     public function mount(){
 
         $this->users = User::all();
@@ -28,7 +32,30 @@ class Admin extends Component
 
     public function userDetails($id){
         $this->chosenUser = User::find($id);
+
+        // Bind data in the form field for update form
+        $this->first_name = $this->chosenUser->first_name;
+        $this->last_name = $this->chosenUser->last_name;
+        $this->email = $this->chosenUser->email;
+        
         $this->dispatch('open-edit-student');
+    }
+
+    public function update(){
+
+        $this->validate([
+            'email' => 'string|email|max:255|unique:users'
+        ]);
+
+        $this->chosenUser->update([
+            'first_name' => $this->first_name,
+            'last_name' => $this->last_name,
+            'email' => $this->email
+        ]);
+
+        $this->users = User::all();
+
+        $this->dispatch('close-edit-student');
     }
 
     public function render()
