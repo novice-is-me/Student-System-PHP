@@ -41,21 +41,25 @@
                     </div>
                 </div>                
             </div>
-        </div>
-    </nav>
-    
+        </nav>
+    </div>
+        
     @auth
     <header class="bg-white shadow">
         <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
             @auth 
-            <h1 class="text-3xl font-bold tracking-tight text-gray-900">{{Auth::user()->first_name}}'s Dashboard</h1>
+                @if(Auth::user()->admin === 0){
+                    <h1 class="text-3xl font-bold tracking-tight text-gray-900">{{Auth::user()->first_name}}'s Dashboard</h1>
+                }
+                @else
+                    <h1 class="text-3xl font-bold tracking-tight text-gray-900">Admin Dashboard ({{Auth::user()->first_name}})</h1>
+                @endif
             @else
             <h1 class="text-3xl font-bold tracking-tight text-gray-900">Dashboard</h1>
             @endauth
         </div>
     </header>
     @endauth
-    
     <main>
         <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
             {{ $slot }}

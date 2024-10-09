@@ -11,20 +11,19 @@ class Admin extends Component
 {
 
     public $users;
-
     public $courses;
-
     public $subjects;
-
     public $chosenUser;
-
     public $first_name;
     public $last_name;
     public $email;
+    public $selectedUser;
+    public $course;
+    public $subject;
 
     public function mount(){
 
-        $this->users = User::all();
+        $this->users = User::where('admin', 0)->get();
         $this->courses = Course::all();
         $this->subjects = Subject::all();
 
@@ -44,7 +43,7 @@ class Admin extends Component
     public function update(){
 
         $this->validate([
-            'email' => 'string|email|max:255|unique:users'
+            'email' => 'string|email|max:255'
         ]);
 
         $this->chosenUser->update([
@@ -58,6 +57,22 @@ class Admin extends Component
         $this->dispatch('close-edit-student');
     }
 
+    public function viewMore($id){
+        // Getting the selectedUser through the ID
+        $this->selectedUser = User::find($id);
+        
+        // Assigning the selectedUser course and subject to the public variable
+        if($this->selectedUser){
+            if($this->selectedUser->course){
+                $this->course = $this->selectedUser->course;
+                $this->subject = $this->selectedUser->course->subjects;
+            }
+        }
+
+        $this->dispatch('open-view-more');
+        $this->dispatch('close-edit-student');
+    }
+    
     public function render()
     {
         return view('livewire.admin');
