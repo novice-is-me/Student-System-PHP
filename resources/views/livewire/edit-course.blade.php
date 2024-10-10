@@ -1,4 +1,4 @@
-<div>
+<div wire:poll>
     <a href="{{ route('admin')}}" class="bg-black px-4 py-2 rounded hover:cursor-pointer text-white">< Back</a>
     <div class=" flex items-center gap-4 mt-4">
         <h3 class=" text-3xl font-semibold">{{ $course->name }}</h3>

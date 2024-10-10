@@ -38,6 +38,9 @@ class EditCourse extends Component
 
     public function render()
     {
-        return view('livewire.edit-course');
+        $subjects = $this->course->subjects;
+        return view('livewire.edit-course', [
+            'subjects' => $subjects
+        ]);
     }
 }
