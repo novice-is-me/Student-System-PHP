@@ -72,6 +72,10 @@ class Admin extends Component
         $this->dispatch('open-view-more');
         $this->dispatch('close-edit-student');
     }
+
+    public function deleteCourse($id){
+
+    }
     
     public function render()
     {

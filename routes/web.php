@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\UserController;
 use App\Livewire\Admin;
 use App\Livewire\Dashboard;
+use App\Livewire\EditCourse;
 use App\Livewire\Enrollment;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -18,7 +19,8 @@ Route::get('/logout', [UserController::class, 'logout'])->name('logout');
 Route::get('/dashboard', Dashboard::class)->name('dashboard');
 Route::get('/admin', Admin::class)->name('admin');
 // Admin section
-Route::get('/edit-student/{id}', Admin::class)->name('edit-student');
+
+Route::get('edit-course/{id}', EditCourse::class)->name('edit-course');
 
 // Enrollment Section
 Route::get('/enrollment', Enrollment::class);
