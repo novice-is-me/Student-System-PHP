@@ -8,7 +8,7 @@
     </div>
     <div class=" flex justify-between items-center">
         <p class=" text-xl font-bold my-4">Subjects Under this Course:</p>
-        <button class="bg-green-300 px-4 py-2 rounded font-semibold">Add Subject +</button>
+        <a class="bg-green-300 px-4 py-2 rounded font-semibold hover:cursor-pointer" @click="$dispatch('open-add-subject')">Add Subject +</a>
     </div>
     <div class=" mb-7">
         <x-table>
@@ -31,7 +31,7 @@
                     @else
                         <tr class="flex justify-evenly font-medium text-center p-5">
                             <td class="">
-                                <a href="" class="bg-green-300 px-4 py-2 rounded font-semibold" wire:click='addSubject'>Add Subject + </a>
+                                <a href="" class="bg-green-300 px-4 py-2 rounded font-semibold hover:cursor-pointer" @click="$dispatch('open-add-student')">Add Subject + </a>
                             </td>
                         </tr>
                     @endif
@@ -39,7 +39,6 @@
             </x-slot>
         </x-table>
     </div>
-    <div>
-        <button class="bg-blue-600 px-4 py-2 rounded font-semibold">Save Update</button>
-    </div>
+
+    @include('components.add-subject-modal')
 </div>
