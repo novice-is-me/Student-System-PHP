@@ -73,8 +73,16 @@ class Admin extends Component
         $this->dispatch('close-edit-student');
     }
 
-    public function deleteCourse($id){
+    public function delete($id){
+        $deleteCourse = Course::find($id);
 
+        if($deleteCourse){
+            $deleteCourse->delete(); 
+             
+            $this->dispatch('close-delete-modal');
+        }else{
+            session()->flash('error', 'Course not found');
+        }
     }
     
     public function render()

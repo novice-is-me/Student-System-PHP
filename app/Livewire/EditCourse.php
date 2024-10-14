@@ -40,7 +40,7 @@ class EditCourse extends Component
         $this->dispatch('close-add-subject');
     }
 
-    public function deleteSubject($id){
+    public function delete($id){
         $deletedSubject = Subject::find($id);
 
         if($deletedSubject){
