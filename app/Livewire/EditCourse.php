@@ -25,9 +25,16 @@ class EditCourse extends Component
             'new_subject' => 'string'
         ]);
 
-        $this->course->subjects()->create([
-            'name' => $this->new_subject
-        ]);
+        $existingSubject = $this->subjects->firstWhere('name', $this->new_subject);
+        
+        if(!$existingSubject){
+            $this->course->subjects()->create([
+                'name' => $this->new_subject
+            ]);
+            session()->flash('success', 'Subject has been added succesfully.');
+        }else{
+            session()->flash('error', 'Subject already exist');
+        }
 
         $this->dispatch('close-add-subject');
     }

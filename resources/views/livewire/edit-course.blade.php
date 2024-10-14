@@ -10,6 +10,15 @@
         <p class=" text-xl font-bold my-4">Subjects Under this Course:</p>
         <a class="bg-green-300 px-4 py-2 rounded font-semibold hover:cursor-pointer" @click="$dispatch('open-add-subject')">Add Subject +</a>
     </div>
+    @if(session('success'))
+        <div class=" p-4 bg-green-200 rounded-[20px] mb-4">
+            <p class=" font-semibold text-xl">{{ session('success')}}</p>
+        </div>
+    @elseif (session('error'))
+        <div class=" p-4 bg-red-200 rounded-[20px] mb-4">
+            <p class=" font-semibold text-xl">{{ session('error')}}</p>
+        </div>
+    @endif
     <div class=" mb-7">
         <x-table>
             <x-slot name="thead">
