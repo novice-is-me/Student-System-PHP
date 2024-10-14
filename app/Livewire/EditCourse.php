@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Models\Course;
+use App\Models\Subject;
 use Illuminate\Support\Facades\Request;
 use Livewire\Component;
 
@@ -39,8 +40,16 @@ class EditCourse extends Component
         $this->dispatch('close-add-subject');
     }
 
-    public function delete($id){
+    public function deleteSubject($id){
+        $deletedSubject = Subject::find($id);
 
+        if($deletedSubject){
+            $deletedSubject->delete(); 
+             
+            $this->dispatch('close-delete-modal');
+        }else{
+            session()->flash('error', 'Subject not found');
+        }
     }
 
     public function render()

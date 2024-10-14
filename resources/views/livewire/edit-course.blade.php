@@ -32,8 +32,8 @@
                             <tr wire:key='{{ $subject->id }}' class="flex justify-evenly font-medium text-center p-5">
                                 <td>{{ $subject->name }}</td>
                                 <td>
-                                    <a class=" bg-green-400 px-4 py-2 rounded hover:cursor-pointer" href="">Edit</a>
-                                    <a class=" bg-red-400 px-4 py-2 rounded hover:cursor-pointer" href="">Delete</a>
+                                    <a class=" bg-green-400 px-4 py-2 rounded hover:cursor-pointer">Edit</a>
+                                    <a class=" bg-red-400 px-4 py-2 rounded hover:cursor-pointer" @click="$dispatch('open-delete-modal', { id: {{ $subject->id }}})">Delete</a>
                                 </td>
                             </tr>
                         @endforeach
@@ -50,4 +50,5 @@
     </div>
 
     @include('components.add-subject-modal')
+    @include('components.delete-modal')
 </div>
