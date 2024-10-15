@@ -13,10 +13,11 @@ class EditCourse extends Component
     public $course;
     public $subjects;
     public $new_subject;
-
+    public $course_name;
     public function mount($id){
         $this->course = Course::find($id);
         $this->subjects = $this->course->subjects;
+        $this->course_name = $this->course->name;
     }
 
     public function addSubject(){
@@ -50,6 +51,20 @@ class EditCourse extends Component
         }else{
             session()->flash('error', 'Subject not found');
         }
+    }
+
+    public function editCourseName(){
+        
+        $this->validate([
+            'course_name' => 'string'
+        ]);
+
+        $this->course->update([
+            'name' => $this->course_name
+        ]);
+
+        $this->dispatch('close-edit-name');
+
     }
 
     public function render()
