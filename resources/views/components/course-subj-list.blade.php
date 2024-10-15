@@ -1,6 +1,6 @@
 <div class=" mb-4" wire:poll>
     <div class=" mb-8">
-        <a href="{{ route('dashboard') }}" class="bg-blue-300 px-4 py-2 rounded font-semibold hover:cursor-pointer">Add Course +</a>
+        <a href="{{ route('add-course') }}" class="bg-blue-300 px-4 py-2 rounded font-semibold hover:cursor-pointer">Add Course +</a>
     </div>
     <x-table>
         <x-slot name="thead">

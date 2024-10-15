@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\UserController;
+use App\Livewire\AddCourse;
 use App\Livewire\Admin;
 use App\Livewire\Dashboard;
 use App\Livewire\EditCourse;
@@ -21,7 +22,7 @@ Route::get('/admin', Admin::class)->name('admin');
 // Admin section
 
 Route::get('edit-course/{id}', EditCourse::class)->name('edit-course');
-
+Route::get('add-course', AddCourse::class)->name('add-course');
 // Enrollment Section
 Route::get('/enrollment', Enrollment::class);
 
