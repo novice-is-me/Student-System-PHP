@@ -44,6 +44,9 @@ class EditCourse extends Component
         }
 
         $this->dispatch('close-add-subject');
+        $this->reset('new_subject');
+
+        $this->subjects = $this->course->subjects;
     }
 
     public function delete($id){
@@ -56,6 +59,8 @@ class EditCourse extends Component
         }else{
             session()->flash('error', 'Subject not found');
         }
+
+        $this->subjects = $this->course->subjects;
     }
 
     public function editCourseName(){
