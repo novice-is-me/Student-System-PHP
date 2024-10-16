@@ -33,7 +33,7 @@ class EditCourse extends Component
         ]);
 
         $existingSubject = $this->subjects->firstWhere('name', $this->new_subject);
-        
+
         if(!$existingSubject){
             $this->course->subjects()->create([
                 'name' => $this->new_subject
@@ -50,8 +50,8 @@ class EditCourse extends Component
         $deletedSubject = Subject::find($id);
 
         if($deletedSubject){
-            $deletedSubject->delete(); 
-             
+            $deletedSubject->delete();
+
             $this->dispatch('close-delete-modal');
         }else{
             session()->flash('error', 'Subject not found');
@@ -63,26 +63,35 @@ class EditCourse extends Component
         $this->validate([
             'course_name' => 'string'
         ]);
-        
+
         $this->course->update([
             'name' => $this->course_name
         ]);
-        
-        $this->dispatch('open-edit-name', name: 'edit_course_name');
-       
-        // $this->dispatch('close-edit-name');
+
+        $this->dispatch('close-edit-name', name: 'edit_course_name');
     }
 
-    public function editSubjectName($subjectId){
-        
+    public function setSubjectForEditing($subjectId){
         $this->specific_subject = Subject::find($subjectId);
-        $this->specific_subject_id = $this->specific_subject->id;
 
-        if($this->specific_subject){
+        if ($this->specific_subject) {
+            $this->specific_subject_id = $this->specific_subject->id;
             $this->specific_subject_name = $this->specific_subject->name;
-        }else{
-            dd('Subject not found');
         }
+    }
+
+    public function editSubjectName(){
+        $subject = Subject::find($this->specific_subject_id);
+
+        if ($subject) {
+            $subject->update([
+                'name' => $this->specific_subject_name 
+            ]);
+        } 
+
+        $this->subjects->where('id', $this->specific_subject_id)->first()->name = $this->specific_subject_name;
+
+        $this->dispatch('close-edit-name', name: 'edit_subject_name');
     }
 
     public function closeModal(){

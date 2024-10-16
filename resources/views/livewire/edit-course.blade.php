@@ -39,7 +39,7 @@
                                 <td>
                                     <a class="bg-green-400 px-4 py-2 rounded hover:cursor-pointer" 
                                     @click="$dispatch('open-edit-name', { name: 'edit_subject_name'})"
-                                    wire:click='editSubjectName({{ $subject->id }})'>Edit</a>
+                                    wire:click='setSubjectForEditing({{ $subject->id }})'>Edit</a>
 
                                     <a class=" bg-red-400 px-4 py-2 rounded hover:cursor-pointer" @click="$dispatch('open-delete-modal', { id: {{ $subject->id }}})">Delete</a>
                                 </td>
@@ -70,14 +70,16 @@
 
     @endif
 
-    <x-edit-name name="edit_subject_name"
+    <x-edit-name 
+        name="edit_subject_name"
         :function_name="'editSubjectName'"
         :data_model="'specific_subject_name'"
         :title="'Subject Name'"
-        :close_modal="'closeModal'" 
+        :close_modal="'closeModal'"
         :id="$specific_subject_id"
-        :has_parameter="'true'"
+        :has_parameter="true"
     />
+
 
     @include('components.delete-modal')
 </div>
