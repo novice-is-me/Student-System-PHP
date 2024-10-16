@@ -14,7 +14,12 @@ class EditCourse extends Component
     public $subjects;
     public $new_subject;
     public $course_name;
+    // public $trigger_course = false;
+    public $specific_subject;
+    public $specific_subject_name;
+    public $specific_subject_id;
     public function mount($id){
+
         $this->course = Course::find($id);
         $this->subjects = $this->course->subjects;
         $this->course_name = $this->course->name;
@@ -54,17 +59,35 @@ class EditCourse extends Component
     }
 
     public function editCourseName(){
-        
+
         $this->validate([
             'course_name' => 'string'
         ]);
-
+        
         $this->course->update([
             'name' => $this->course_name
         ]);
+        
+        $this->dispatch('open-edit-name', name: 'edit_course_name');
+       
+        // $this->dispatch('close-edit-name');
+    }
 
-        $this->dispatch('close-edit-name');
+    public function editSubjectName($subjectId){
+        
+        $this->specific_subject = Subject::find($subjectId);
+        $this->specific_subject_id = $this->specific_subject->id;
 
+        if($this->specific_subject){
+            $this->specific_subject_name = $this->specific_subject->name;
+        }else{
+            dd('Subject not found');
+        }
+    }
+
+    public function closeModal(){
+        // $this->trigger_course = false;
+        $this->dispatch('close-edit-name', name: 'edit_course_name');
     }
 
     public function render()

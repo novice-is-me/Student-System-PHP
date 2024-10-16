@@ -1,8 +1,11 @@
-<div wire:poll>
+<div >
     <a href="{{ route('admin')}}" class="bg-black px-4 py-2 rounded hover:cursor-pointer text-white">< Back</a>
     <div class=" flex items-center gap-4 mt-4">
         <h3 class=" text-3xl font-semibold">{{ $course->name }}</h3>
-        <div @click="$dispatch('open-edit-name')">
+        <div 
+        {{-- wire:click='editCourseName' --}}
+        @click="$dispatch('open-edit-name', { name: 'edit_course_name'})"
+        >
             <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="20" height="20" viewBox="0 0 24 24" class=" hover:cursor-pointer">
                 <path d="M 19.171875 2 C 18.448125 2 17.724375 2.275625 17.171875 2.828125 L 16 4 L 20 8 L 21.171875 6.828125 C 22.275875 5.724125 22.275875 3.933125 21.171875 2.828125 C 20.619375 2.275625 19.895625 2 19.171875 2 z M 14.5 5.5 L 3 17 L 3 21 L 7 21 L 18.5 9.5 L 14.5 5.5 z"></path>
             </svg>
@@ -34,7 +37,10 @@
                             <tr wire:key='{{ $subject->id }}' class="flex justify-evenly font-medium text-center p-5">
                                 <td>{{ $subject->name }}</td>
                                 <td>
-                                    <a class=" bg-green-400 px-4 py-2 rounded hover:cursor-pointer">Edit</a>
+                                    <a class="bg-green-400 px-4 py-2 rounded hover:cursor-pointer" 
+                                    @click="$dispatch('open-edit-name', { name: 'edit_subject_name'})"
+                                    wire:click='editSubjectName({{ $subject->id }})'>Edit</a>
+
                                     <a class=" bg-red-400 px-4 py-2 rounded hover:cursor-pointer" @click="$dispatch('open-delete-modal', { id: {{ $subject->id }}})">Delete</a>
                                 </td>
                             </tr>
@@ -52,6 +58,26 @@
     </div>
 
     @include('components.add-subject-modal')
-    @include('components.edit-name')
+
+    <x-edit-name name="edit_course_name"
+        :function_name="'editCourseName'"
+        :data_model="'course_name'"
+        :title="'Course Name'"
+        :close_modal="'closeModal'"
+    />
+
+    @if($specific_subject)
+
+    @endif
+
+    <x-edit-name name="edit_subject_name"
+        :function_name="'editSubjectName'"
+        :data_model="'specific_subject_name'"
+        :title="'Subject Name'"
+        :close_modal="'closeModal'" 
+        :id="$specific_subject_id"
+        :has_parameter="'true'"
+    />
+
     @include('components.delete-modal')
 </div>
