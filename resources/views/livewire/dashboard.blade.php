@@ -17,15 +17,15 @@
                     $courseUnit = str_pad(rand(0, 24), 2, '1', STR_PAD_LEFT);
                 @endphp
                 @if ($courses->count() > 0)
-                <tr class="flex justify-evenly font-medium">
-                    <td>{{ $courseCode }}</td>
-                    <td>{{ $courses->name }}</td>
-                    <td>{{ $courseUnit }}</td>
-                </tr>
+                    <tr class="flex justify-evenly font-medium text-center p-5">
+                        <td>{{ $courseCode }}</td>
+                        <td>{{ $courses->name }}</td>
+                        <td>{{ $courseUnit }}</td>
+                    </tr>
                 @else
-                <tr class="flex justify-evenly font-medium">
-                    <td colspan="3">No course enrolled yet</td>
-                </tr>
+                    <tr class="flex justify-evenly font-medium text-center p-5">
+                        <td colspan="3">No course enrolled yet</td>
+                    </tr>
                 @endif
             </x-slot>
         </x-table>
