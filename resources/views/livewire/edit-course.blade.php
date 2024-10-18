@@ -66,10 +66,6 @@
         :close_modal="'closeModal'"
     />
 
-    @if($specific_subject)
-
-    @endif
-
     <x-edit-name 
         name="edit_subject_name"
         :function_name="'editSubjectName'"

@@ -6,7 +6,9 @@
         </div>
 
         <div class=" mb-5">
-            <a class="bg-green-300 px-4 py-2 rounded font-semibold hover:cursor-pointer" @click="$dispatch('open-add-subject')">Add Subject +</a>
+            <a class="bg-green-300 px-4 py-2 rounded font-semibold hover:cursor-pointer" @click="$dispatch('open-edit-name', {
+                name: 'add_course'
+            })">Add Subject +</a>
         </div>
 
         <x-table>
@@ -15,13 +17,13 @@
                 <th>Options</th>
             </x-slot>
             <x-slot name="tbody">
-                @if ($new_subject != null)
-                    @if($new_subject->count() > 0)
-                        @foreach ($new_subject as $subject)
-                            <tr wire:key='{{ $subject->id }}' class="flex justify-evenly font-medium text-center p-5">
-                                <td>{{ $subject->name }}</td>
+                @if ($added_subject != null)
+                    @if($added_subject != 0)
+                        @foreach ($added_subject as $subject)
+                            <tr class="flex justify-evenly font-medium text-center p-5">
+                                <td>{{ $subject }}</td>
                                 <td>
-                                    <a class=" bg-red-400 px-4 py-2 rounded hover:cursor-pointer" @click="$dispatch('open-delete-modal', { id: {{ $subject->id }}})">Delete</a>
+                                    {{-- <a class=" bg-red-400 px-4 py-2 rounded hover:cursor-pointer" @click="$dispatch('open-delete-modal', { id: {{ $subject->id }}})">Delete</a> --}}
                                 </td>
                             </tr>
                         @endforeach
@@ -38,13 +40,11 @@
         </x-table>
     </x-form>
     
-    {{-- <x-edit-name 
-        name=""
-        :function_name="''"
-        :data_model="''"
+    <x-edit-name 
+        name="add_course"
+        :function_name="'addCourse'"
         :title="'Add Subject'"
-        :close_modal="''"
-        :id="$specific_subject_id"
-        :has_parameter=""
-    /> --}}
+        :has_model="false"
+        :data_model="'new_subject'"
+    />
 </div>
