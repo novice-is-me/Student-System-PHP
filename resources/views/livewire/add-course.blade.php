@@ -1,8 +1,14 @@
 <div>
-    <x-form name="Submit" :action="'submitForm'">
+    <div class=" mb-4">
+        <a href="{{ route('admin')}}" class="bg-black px-4 py-2 rounded hover:cursor-pointer text-white">< Back</a>
+    </div>
+    <x-form name="submit" :action="'submitForm'">
         <div class=" mb-4">
             <x-label name="course_name">Course Name</x-label>
-            <x-input name="course_name" type="text" />
+            <x-input name="course_name" type="text" :model="'added_course'"/>
+            @error('added_course')
+                <x-error>{{ $message }}</x-error>
+            @enderror
         </div>
 
         <div class=" mb-5">
@@ -19,11 +25,11 @@
             <x-slot name="tbody">
                 @if ($added_subject != null)
                     @if($added_subject != 0)
-                        @foreach ($added_subject as $subject)
+                        @foreach ($added_subject as $index => $subject)
                             <tr class="flex justify-evenly font-medium text-center p-5">
                                 <td>{{ $subject }}</td>
                                 <td>
-                                    {{-- <a class=" bg-red-400 px-4 py-2 rounded hover:cursor-pointer" @click="$dispatch('open-delete-modal', { id: {{ $subject->id }}})">Delete</a> --}}
+                                    <a wire:click='deleteSubject({{ $index }})' class=" bg-red-400 px-4 py-2 rounded hover:cursor-pointer">Delete</a>
                                 </td>
                             </tr>
                         @endforeach
@@ -38,6 +44,9 @@
                
             </x-slot>
         </x-table>
+        @error('added_subject')
+            <x-error>{{ $message }}</x-error>
+        @enderror
     </x-form>
     
     <x-edit-name 

@@ -7,12 +7,13 @@ use Livewire\Component;
 
 class AddCourse extends Component
 {
-    public $course;
+    public $course_name;
     public $subjects;
     public $new_subject;
     public array $added_subject = [];
+    public $added_course;
     public function mount(){
-        $this->course = Course::all();
+        $this->course_name = Course::pluck('name');
     }
 
     public function addCourse(){
@@ -27,25 +28,44 @@ class AddCourse extends Component
             // close the modal
             $this->dispatch('close-edit-name', name: 'add_course');
         }
-    }
+    }   
 
     public function submitForm(){
+      
         $this->validate([
-            'course_name' => 'required|string'
-        ]);
+            'added_course' => 'required|string',
+            'added_subject' => 'required|array|min:1',
+        ], 
+        [
+            'added_course.required' => 'Course is required',
+            'added_subject.required' => 'Subject is required'
+        ]
+        );
+       
+        
+        if($this->added_course !== $this->course_name){
+            // add the added course to the database
+            $course = Course::create([
+                'name' => $this->added_course
+            ]);
 
-        //Check if there is no existing course
+            // add the added subjects to the database
+            foreach($this->added_subject as $subject){
+                $course->subjects()->create([
+                    'name' => $subject
+                ]);
+            }
 
-        //dispatch something
-
-        // fetch 
-        $course = Course::create([
-            'name' => $this->course_name
-        ]);
-
+            // redirect to the admin page
+            return redirect()->route('admin');
+        }
     }
 
+    public function deleteSubject($index){
+       unset($this->added_subject[$index]);
 
+       $this->added_subject = array_values($this->added_subject);
+    }
 
     public function render()
     {
